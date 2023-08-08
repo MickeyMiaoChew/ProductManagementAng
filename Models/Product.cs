@@ -8,4 +8,11 @@
         public int ProductPrice { get; set; }
         public int ProductStock { get; set; }
     }
+
+    public class ApiResponse
+    {
+        public bool Success { get; set; }
+        public string? Message { get; set; }
+        public IEnumerable<Product>? Data { get; set; }
+    }
 }

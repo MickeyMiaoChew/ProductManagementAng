@@ -15,10 +15,12 @@ namespace ProductManagement.Controllers
             productService = _productService;
         }
         [HttpGet]
-        public IEnumerable<Product> ProductList()
+        public IActionResult ProductList()
         {
             var productList = productService.GetProductList();
-            return productList;
+            var response = new { success = true, message = "Products retrieved successfully", data = productList };
+            return Ok(response);
+            //return productList;
         }
         [HttpGet("{id}")]
         public Product GetProductById(int id)
@@ -26,14 +28,35 @@ namespace ProductManagement.Controllers
             return productService.GetProductById(id);
         }
         [HttpPost]
-        public Product AddProduct(Product product)
+        public IActionResult AddProduct(Product product)
         {
-            return productService.AddProduct(product);
+            var addedProduct = productService.AddProduct(product);
+            if (AddProduct !=null)
+            {
+                var response = new { success = true, message = "Products added successfully", data = addedProduct };
+                return Ok(response);
+            }
+            else
+            {
+                var response = new { success = true, message = "Failed to add Product", data = addedProduct };
+                return BadRequest(response);
+            }
         }
         [HttpPut]
-        public Product UpdateProduct(Product product)
+        public IActionResult UpdateProduct(Product product)
         {
-            return productService.UpdateProduct(product);
+            var updatedProduct = productService.UpdateProduct(product);
+            if (AddProduct != null)
+            {
+                var response = new { success = true, message = "Products Update successfully", data = updatedProduct };
+                return Ok(response);
+            }
+            else
+            {
+                var response = new { success = true, message = "Failed to add Product", data = updatedProduct };
+                return BadRequest(response);
+            }
+            //return productService.UpdateProduct(product);
         }
         [HttpDelete("{id}")]
         public bool DeleteProduct(int id)
