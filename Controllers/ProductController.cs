@@ -17,9 +17,20 @@ namespace ProductManagement.Controllers
         [HttpGet]
         public IActionResult ProductList()
         {
-            var productList = productService.GetProductList();
-            var response = new { success = true, message = "Products retrieved successfully", data = productList };
-            return Ok(response);
+            try
+            {
+                var productList = productService.GetProductList();
+                var response = new { success = true, message = "Products retrieved successfully", data = productList };
+                return Ok(response);
+
+            }
+            catch (Exception ex)
+            {
+
+                var errorResponse = new { success = true, message = "Failed to add Product  :" + ex.Message, data = ex.Message };
+                return BadRequest(errorResponse);
+
+            }
             //return productList;
         }
         [HttpGet("{id}")]
@@ -30,32 +41,37 @@ namespace ProductManagement.Controllers
         [HttpPost]
         public IActionResult AddProduct(Product product)
         {
-            var addedProduct = productService.AddProduct(product);
-            if (AddProduct !=null)
+            
+            try
             {
+                var addedProduct = productService.AddProduct(product);
                 var response = new { success = true, message = "Products added successfully", data = addedProduct };
                 return Ok(response);
             }
-            else
+            catch (Exception ex)
             {
-                var response = new { success = true, message = "Failed to add Product", data = addedProduct };
-                return BadRequest(response);
+                
+                var errorResponse = new { success = true, message = "Failed to add Product  :"+ex.Message , data = ex.Message };
+                return BadRequest(errorResponse);
             }
         }
+
         [HttpPut]
         public IActionResult UpdateProduct(Product product)
         {
-            var updatedProduct = productService.UpdateProduct(product);
-            if (AddProduct != null)
+            try
             {
+                var updatedProduct = productService.UpdateProduct(product);
                 var response = new { success = true, message = "Products Update successfully", data = updatedProduct };
                 return Ok(response);
             }
-            else
+            catch (Exception ex)
             {
-                var response = new { success = true, message = "Failed to add Product", data = updatedProduct };
-                return BadRequest(response);
+                var errorResponse = new { success = true, message = "Failed to add Product" + ex.Message, data = ex.Message };
+                return BadRequest(errorResponse);
             }
+    
+          
             //return productService.UpdateProduct(product);
         }
         [HttpDelete("{id}")]
