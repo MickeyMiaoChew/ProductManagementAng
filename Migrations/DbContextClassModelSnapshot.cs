@@ -37,8 +37,8 @@ namespace ProductManagement.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ProductPrice")
-                        .HasColumnType("int");
+                    b.Property<double>("ProductPrice")
+                        .HasColumnType("float");
 
                     b.Property<int>("ProductStock")
                         .HasColumnType("int");

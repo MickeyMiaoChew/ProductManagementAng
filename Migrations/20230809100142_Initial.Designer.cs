@@ -11,7 +11,7 @@ using ProductManagement.Data;
 namespace ProductManagement.Migrations
 {
     [DbContext(typeof(DbContextClass))]
-    [Migration("20230804072546_Initial")]
+    [Migration("20230809100142_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -40,8 +40,8 @@ namespace ProductManagement.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ProductPrice")
-                        .HasColumnType("int");
+                    b.Property<double>("ProductPrice")
+                        .HasColumnType("float");
 
                     b.Property<int>("ProductStock")
                         .HasColumnType("int");

@@ -18,7 +18,7 @@ namespace ProductManagement.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProductName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ProductDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProductPrice = table.Column<int>(type: "int", nullable: false),
+                    ProductPrice = table.Column<double>(type: "float", nullable: false),
                     ProductStock = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
